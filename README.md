@@ -1,22 +1,19 @@
-# Frequency-Division-Multiplexing---Modulation-and-Demodulation-using-Python
-
-__Aim__:
+Frequency-Division-Multiplexing---Modulation-and-Demodulation-using-Python
+Aim:
 
 To generate an FDM signal by multiplexing multiple baseband message signals on different carrier frequencies, transmit (sum) them, optionally add channel noise, then recover each message by bandpass filtering and coherent demodulation in Python (Google Colab). Observe time & frequency domain signals and measure recovery quality.
 
-
-__Apparatus Required__:
+Apparatus Required:
 
 Google Colab (or any Python environment)
 
 Python libraries: numpy, matplotlib, scipy (scipy.signal)
 
-
-__Theory__:
+Theory:
 
 FDM places different message signals in separate, non-overlapping frequency bands by modulating each message onto a distinct carrier frequency. The multiplexed signal is the sum of all modulated channels. At the receiver, bandpass filters (or tuned filters) isolate each channel; then each isolated carrier is demodulated (coherently multiplied by a synchronized carrier) and low-pass filtered to recover the original baseband.
 
-__Procedure__:
+Procedure:
 
 1 — Imports and parameters
 
@@ -32,6 +29,80 @@ __Procedure__:
 
 7 — Demodulate each isolated channel (coherent) and low-pass filter to recover baseband
 
-__Output_:
+Program:
+~~~
 
-__Result__:
+t = linspace(0, 1, 1000);
+
+freqs = [5, 5.5, 6, 6.5, 7, 7.5];
+
+signals = zeros(6, length(t));
+
+for i = 1:6
+
+signals(i, :) = sin(2 * %pi * freqs(i) * t);
+
+end
+
+fdm_signal = zeros(1, length(t));
+
+for i = 1:6
+
+fdm_signal = fdm_signal + signals(i, :);
+
+end
+
+demux_signals = zeros(6, length(t));
+
+for i = 1:6
+
+demux_signals(i, :) = fdm_signal .* sin(2 * %pi * freqs(i) * t);
+
+end
+
+scf(1);
+
+clf;
+
+for i = 1:6
+
+subplot(3,2,i);
+
+plot(t, signals(i, :));
+
+title('Original Signal f=' + string(freqs(i)));
+
+end
+
+scf(2);
+
+clf;
+
+plot(t, fdm_signal);
+
+title("FDM Signal");
+
+scf(3);
+
+clf;
+
+for i = 1:6
+
+subplot(3,2,i);
+
+plot(t, demux_signals(i, :));
+
+title('Demultiplexed Signal f=' + string(freqs(i)));
+
+end
+~~~
+## Output:
+
+<img width="762" height="696" alt="image" src="https://github.com/user-attachments/assets/7f314cc2-7c7e-4016-8bdc-24ecba042597" />
+<img width="758" height="714" alt="image" src="https://github.com/user-attachments/assets/7b0424b5-1e7a-4500-b29b-a363ee0156e0" />
+<img width="757" height="716" alt="image" src="https://github.com/user-attachments/assets/2840e4f5-5738-406c-9f41-cf1ac0046419" />
+
+
+Result:
+
+FDM was successfully simulated. The six input signals were combined into one composite signal and later recovered correctly through demultiplexing using Scilab.
