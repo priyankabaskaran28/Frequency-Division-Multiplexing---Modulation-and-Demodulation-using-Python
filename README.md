@@ -1,19 +1,20 @@
-Frequency-Division-Multiplexing---Modulation-and-Demodulation-using-Python
-Aim:
+# Frequency-Division-Multiplexing---Modulation-and-Demodulation-using-Python
+
+## Aim:
 
 To generate an FDM signal by multiplexing multiple baseband message signals on different carrier frequencies, transmit (sum) them, optionally add channel noise, then recover each message by bandpass filtering and coherent demodulation in Python (Google Colab). Observe time & frequency domain signals and measure recovery quality.
 
-Apparatus Required:
+## Apparatus Required:
 
 Google Colab (or any Python environment)
 
 Python libraries: numpy, matplotlib, scipy (scipy.signal)
 
-Theory:
+## Theory:
 
 FDM places different message signals in separate, non-overlapping frequency bands by modulating each message onto a distinct carrier frequency. The multiplexed signal is the sum of all modulated channels. At the receiver, bandpass filters (or tuned filters) isolate each channel; then each isolated carrier is demodulated (coherently multiplied by a synchronized carrier) and low-pass filtered to recover the original baseband.
 
-Procedure:
+## Procedure:
 
 1 — Imports and parameters
 
@@ -97,12 +98,13 @@ title('Demultiplexed Signal f=' + string(freqs(i)));
 end
 ~~~
 ## Output:
+### Modulated Signal
+<img width="1280" height="688" alt="image" src="https://github.com/user-attachments/assets/95ac735c-242e-4b1d-a6e6-e1e7e0ea17ce" />
+<img width="1280" height="695" alt="image" src="https://github.com/user-attachments/assets/4a3b2114-6812-473b-ac79-e804f237fa94" />
 
-<img width="762" height="696" alt="image" src="https://github.com/user-attachments/assets/7f314cc2-7c7e-4016-8bdc-24ecba042597" />
-<img width="758" height="714" alt="image" src="https://github.com/user-attachments/assets/7b0424b5-1e7a-4500-b29b-a363ee0156e0" />
-<img width="757" height="716" alt="image" src="https://github.com/user-attachments/assets/2840e4f5-5738-406c-9f41-cf1ac0046419" />
+### Demodulated Signal
+<img width="1280" height="688" alt="image" src="https://github.com/user-attachments/assets/95ac735c-242e-4b1d-a6e6-e1e7e0ea17ce" />
 
-
-Result:
+## Result:
 
 FDM was successfully simulated. The six input signals were combined into one composite signal and later recovered correctly through demultiplexing using Scilab.
